@@ -15,20 +15,18 @@ export const SongSearch = () => {
       return;
     }
     const fetchData = async () => {
-      const { artist, song } = search;
+      const {artist, song } = search;
 
-      let artistUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`;
-      let songUrl = `https://theaudiodb.com/api/v1/json/2/search.php?s=${artist}`;
+      
+      let songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`;
     
       setLoading(true);
-      const [artistRes, songRes] = await Promise.all([
-        helpHttp().get(artistUrl),
+      const [songRes] = await Promise.all([
         helpHttp().get(songUrl),
       ]);
-      console.log(artistRes, songRes)
-
-      setBio(artistRes);
-      setLyric(songRes);
+      
+      console.log(songRes)
+      setLyric(songRes)
       setLoading(false);
 
     };
@@ -44,7 +42,8 @@ export const SongSearch = () => {
     <div>
       <h2>Song Search</h2>
       <SongForm handleSearch={handleSearch} />
-      <SongDetails search={search} lyric={lyric} bio={bio} />
+    
+      {search && !loading && <SongDetails search={search} lyric={lyric} bio={bio} />}
       {loading && <Loader />}
     </div>
   );

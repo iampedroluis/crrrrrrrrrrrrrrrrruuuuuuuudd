@@ -1,7 +1,8 @@
 import React from 'react'
 
-export const SongLyrics = () => {
+export const SongLyrics = ({search, liryc}) => {
   return (
-    <div><h2>Letra de la cancion</h2></div>
+    <div>
+    <p>{console.log("lirica de " + liryc)}</p></div>
   )
 }

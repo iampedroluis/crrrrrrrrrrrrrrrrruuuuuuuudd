@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const SongLyrics = ({search, liryc}) => {
+export const SongLyrics = ({lirycs}) => {
   return (
-    <div>
-    <p>{console.log("lirica de " + liryc)}</p></div>
+    <section>
+    <blockquote style={{whiteSpace:"pre-wrap"}}>{lirycs}</blockquote></section>
   )
 }

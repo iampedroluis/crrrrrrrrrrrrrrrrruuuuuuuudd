@@ -7,10 +7,10 @@ export const SongDetails = ({ search, lyric }) => {
 
   return (
   <div>
-    {lyric.error || lyric.name === "AbortError" ? <Message /> : (
-       <>
+    {lyric.err || lyric.name === "AbortError" ? <Message msg={`Error: no se encontro la cancion " ${search.song} de ${search.artist} " `} bgColor="#dc3545" /> : (
+      <>
       <h2>Letra de {search.artist} - {search.song}</h2>
-      <SongLyrics search={search} />
+      <SongLyrics lirycs={lyric.lyrics} />
       </>
     ) }
       

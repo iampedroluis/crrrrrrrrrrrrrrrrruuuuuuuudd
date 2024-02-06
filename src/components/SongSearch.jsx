@@ -7,7 +7,6 @@ import { helpHttp } from "../helpers/helpHttp";
 export const SongSearch = () => {
   const [search, setSearch] = useState(null);
   const [lyric, setLyric] = useState(null);
-  const [bio, setBio] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export const SongSearch = () => {
         helpHttp().get(songUrl),
       ]);
       
-      console.log(songRes)
+      
       setLyric(songRes)
       setLoading(false);
 
@@ -34,17 +33,20 @@ export const SongSearch = () => {
   }, [search]);
 
   const handleSearch = (data) => {
-    console.log(data);
+    
     setSearch(data);
   };
 
   return (
-    <div>
-      <h2>Song Search</h2>
+    <>
+  <h2> Lyric Song Search <i className="em em-musical_note" ></i></h2>
+    <div className="grid-1-2">
+      
       <SongForm handleSearch={handleSearch} />
-    
-      {search && !loading && <SongDetails search={search} lyric={lyric} bio={bio} />}
       {loading && <Loader />}
+      {search && !loading && <SongDetails search={search} lyric={lyric} />}
+      
     </div>
+    </>
   );
 };

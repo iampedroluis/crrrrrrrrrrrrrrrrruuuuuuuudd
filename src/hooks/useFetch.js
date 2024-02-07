@@ -7,35 +7,39 @@ export const useFetch = (url) => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    const singnal = abortController.singnal;
+    const signal = abortController.signal;
 
     const fetchData = async () => {
       setLoading(true);
 
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, { signal });
+
         if (!res.ok) {
-          let err = new Error("Error en la peticion fetch");
+          let err = new Error("Error en la petición Fetch");
           err.status = res.status || "00";
-          err.statusText = res.statusText || "Ocurrio un error";
+          err.statusText = res.statusText || "Ocurrió un error";
           throw err;
         }
+
         const json = await res.json();
-        if (!singnal.aborted) {
+
+        if (!signal.aborted) {
           setData(json);
           setError(null);
         }
       } catch (error) {
-        if (!singnal.aborted) {
+        if (!signal.aborted) {
           setData(null);
           setError(error);
         }
       } finally {
-        if (!singnal.aborted) {
+        if (!signal.aborted) {
           setLoading(false);
         }
       }
     };
+
     fetchData();
 
     return () => abortController.abort();

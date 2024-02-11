@@ -50,6 +50,11 @@ input[type="reset"]{
     vertical-align: middle;
     cursor: pointer;
 }
+input[type="submit"]:disabled {
+    background: #ccc;
+    color: #efefef;
+    cursor: default;
+  }
 
 form {
     margin-bottom: 1rem;
